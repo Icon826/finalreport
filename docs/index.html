@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>地球物理期末作品集 · Interactive Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #eef2ff;
+      --bg-card: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --accent2: #f97316;
+      --accent3: #22c55e;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border: #cbd5f5;
+      --radius: 16px;
+      --shadow: 0 14px 35px rgba(15,23,42,0.12);
+    }
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body {
+      margin: 0; padding: 0;
+      background: radial-gradient(circle at top, #e0f2fe, #eef2ff);
+      color: var(--text-main);
+    }
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 14px 60px;
+    }
+
+    header h1 { margin: 0; font-size: 30px; }
+    header p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 820px;
+    }
+    .tagline {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .chip {
+      padding: 3px 11px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: #fefce8;
+      color: #854d0e;
+      border: 1px solid #facc15;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 14px 0 18px;
+      border-bottom: 1px solid #d0d7ff;
+      padding-bottom: 6px;
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, rgba(239,246,255,0.98), rgba(239,246,255,0.95));
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .tab-btn span.icon { font-size: 16px; }
+    .tab-btn:hover {
+      background: #e0ecff;
+      color: var(--text-main);
+    }
+    .tab-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.35);
+    }
+
+    .section { display: none; animation: fadeIn 0.2s ease-out; }
+    .section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 21px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3 {
+      margin: 4px 0 6px;
+      font-size: 16px;
+    }
+    h4 {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 6px;
+      border: 1px solid #bfdbfe;
+    }
+
+    ul {
+      margin: 4px 0 8px 20px;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    li { margin: 2px 0; }
+
+    .quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    label { font-size: 13px; color: var(--text-main); }
+
+    input[type="number"], input[type="text"], select {
+      background: #f9fafb;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+    }
+    input::placeholder { color: #9ca3af; }
+
+    button.primary {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      background: linear-gradient(to right, #fb923c, #facc15);
+      color: #111827;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      box-shadow: 0 8px 18px rgba(251,146,60,0.35);
+    }
+    button.primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .result {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--accent2);
+    }
+    .result.good { color: var(--accent3); }
+    .result.bad { color: #dc2626; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 6px 8px;
+      text-align: left;
+    }
+    th {
+      background: #eff6ff;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #15803d;
+      margin-left: 6px;
+    }
+
+    /* flashcards for HW1 */
+    .flashcards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .flash-btn {
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid #cbd5f5;
+      background: #f8fafc;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+    }
+    .flash-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: #1d4ed8;
+      box-shadow: 0 6px 14px rgba(37,99,235,0.3);
+    }
+    .flash-content {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* accordion */
+    .accordion { margin-top: 6px; }
+    .accordion-item {
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      margin-bottom: 6px;
+      overflow: hidden;
+      background: #f9fafb;
+    }
+    .accordion-header {
+      padding: 7px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #eff6ff;
+    }
+    .accordion-header span.title { color: var(--text-main); }
+    .accordion-body {
+      padding: 8px 10px 10px;
+      display: none;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .accordion-item.open .accordion-body { display: block; }
+
+    img.preview {
+      max-width: 100%;
+      border-radius: 12px;
+      border: 1px solid #cbd5f5;
+      margin-top: 10px;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .photo-item {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .photo-item img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #d4d4d8;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    @media(max-width: 640px) {
+      header h1 { font-size: 24px; }
+      .card { padding: 14px 12px; }
+      .tabs { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>地球物理期末作品集 · Interactive</h1>
+    <p class="tagline">四份沒有直接關聯、但都很地球物理的作業，被整理成一個可以玩的網頁。</p>
+    <p>
+      內容依序包含：我的<strong>第一份作業</strong> Geophysics Playground（教具風地球物理概論）、<br>
+      一份重力異常魔法作業、一份校園淺層震測實驗，以及最後的 PyGMT + Scotia Plate 構造圖。
+    </p>
+    <div class="chips">
+      <span class="chip">🌍 Geophysics Playground（第一份作業）</span>
+      <span class="chip">🧮 Free-air & Bouguer 重力</span>
+      <span class="chip">🔨 校園震測</span>
+      <span class="chip">🗺️ PyGMT & Scotia Plate</span>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-target="intro"><span class="icon">🏠</span>總覽</button>
+    <button class="tab-btn" data-target="hw1"><span class="icon">📘</span>第一份作業：Geophysics Playground</button>
+    <button class="tab-btn" data-target="gravity"><span class="icon">🪐</span>重力：自由空間與布格異常</button>
+    <button class="tab-btn" data-target="seismic"><span class="icon">🔨</span>校園震測實驗</button>
+    <button class="tab-btn" data-target="plates"><span class="icon">🗺️</span>PyGMT & Scotia Plate</button>
+  </div>
+
+  <!-- Intro -->
+  <section id="intro" class="section active">
+    <div class="card">
+      <h2>🏠 網頁導覽</h2>
+      <span class="pill">四份獨立作業 · 一起展示</span>
+      <ul>
+        <li><strong>Geophysics Playground：</strong>第一份作業，把地球物理入門變成五張卡片與小測驗。</li>
+        <li><strong>重力魔法：</strong>從觀測重力出發，計算自由空氣異常與布格異常，順便讓網頁幫忙算。</li>
+        <li><strong>校園震測：</strong>實際拉測線、敲鐵板、畫走時圖，估算淺層地層厚度。</li>
+        <li><strong>PyGMT & Scotia Plate：</strong>用程式畫板塊邊界與地形，最後聚焦在 Scotia Plate 的構造與活動。</li>
+      </ul>
+      <div class="quote">
+        操作方式：點上方分頁切換主題；每一頁都有至少一個可以動手玩的小工具，
+        既可以複習，也可以當成期末報告時的 Demo 畫面。
+      </div>
+    </div>
+  </section>
+
+  <!-- HW1 Playground -->
+  <section id="hw1" class="section">
+    <div class="card">
+      <h2>📘 Geophysics Playground（我的第一份作業）</h2>
+      <span class="pill">地球偵探社 · 五張入門卡片</span>
+      <p style="font-size:14px;color:var(--text-muted);margin-top:6px;">
+        這是我的第一份作業：希望把地球物理基礎整理成「一頁式教具」。
+        每張卡片都有核心概念、為什麼重要、以及一個生活比喻或口訣。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🃏 主題 Flashcards<span class="badge">點按切換說明</span></h3>
+      <div class="flashcards">
+        <button class="flash-btn active" data-topic="planet">1. 地球作為行星</button>
+        <button class="flash-btn" data-topic="gravity">2. 重力與大地測量</button>
+        <button class="flash-btn" data-topic="seismology">3. 地震與地球內部</button>
+        <button class="flash-btn" data-topic="heat">4. 年齡、熱與電性</button>
+        <button class="flash-btn" data-topic="geomag">5. 地磁與古地磁</button>
+      </div>
+      <div id="flash-content" class="flash-content">
+        <!-- 文字內容由 JS 填入 -->
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🧪 小測驗：P 波 / S 波誰不能在液體中傳播？</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:6px;">
+        這一題是原始 Playground 裡的小測驗之一，順便檢查自己有沒有把 P、S 波差異記起來。
+      </p>
+      <div style="font-size:13px;">
+        <label><input type="radio" name="q1" value="P" /> 1. P 波</label><br/>
+        <label><input type="radio" name="q1" value="S" /> 2. S 波</label><br/>
+        <label><input type="radio" name="q1" value="both" /> 3. 兩者都可以</label>
+      </div>
+      <button class="primary" onclick="checkQuiz()">提交答案 ✅</button>
+      <div id="quiz-result" class="result"></div>
+    </div>
+  </section>
+
+  <!-- Gravity -->
+  <section id="gravity" class="section">
+    <div class="card">
+      <h2>🪐 重力魔法：自由空間與布格重力異常</h2>
+      <span class="pill">Free-air & Bouguer anomaly</span>
+      <p style="font-size:14px;color:var(--text-muted);margin-top:6px;">
+        這份作業的主軸是：從一組觀測重力與高度資料，計算出 free-air anomaly 和 Bouguer anomaly，
+        並學會如何解讀這些數字背後的「地下密度故事」。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>📚 概念快記</h3>
+      <ul>
+        <li><strong>自由空氣校正 FAC：</strong>只補償「高度變高導致離地心更遠、重力變小」的效應。</li>
+        <li><strong>自由空氣異常 Δg<sub>FA</sub>：</strong>
+          Δg<sub>FA</sub> = g<sub>obs</sub> − g<sub>t</sub> + FAC。</li>
+        <li><strong>布格校正 BC：</strong>把測站與參考面之間那塊岩石的引力扣掉。</li>
+        <li><strong>布格異常 Δg<sub>B</sub>：</strong>Δg<sub>B</sub> = Δg<sub>FA</sub> − BC，更貼近地下密度不均。</li>
+      </ul>
+      <div class="quote">
+        口頭版翻譯：<br>
+        Free-air：大家先站到同一個高度。<br>
+        Bouguer：再把中間那座山的重量也扣光，只剩「真正的地球」。
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🧮 重力異常計算器<span class="badge">互動</span></h3>
+      <p style="font-size:13px;color:var(--text-muted);">
+        請輸入觀測重力 g<sub>obs</sub>、理論重力 g<sub>t</sub>、測站高度 h（m）、岩石密度 ρ（g/cm³）。<br>
+        這裡使用簡化公式：FAC ≈ 0.3086·h，BC ≈ 0.0419·ρ·h（皆為 mGal）。
+      </p>
+      <div class="two-col">
+        <div>
+          <div class="field">
+            <label for="gobs">觀測重力 g_obs (mGal)</label>
+            <input type="number" id="gobs" value="978120" />
+          </div>
+          <div class="field">
+            <label for="gt">理論重力 g_t (mGal)</label>
+            <input type="number" id="gt" value="978954.71" />
+          </div>
+        </div>
+        <div>
+          <div class="field">
+            <label for="h">測站高度 h (m)</label>
+            <input type="number" id="h" value="120" />
+          </div>
+          <div class="field">
+            <label for="rho">岩石密度 ρ (g/cm³)</label>
+            <input type="number" id="rho" value="2.67" step="0.01" />
+          </div>
+          <button class="primary" onclick="calcGravity()">Calculate ✨</button>
+        </div>
+      </div>
+      <div id="gravity-result" class="result"></div>
+
+      <table>
+        <thead>
+          <tr><th>量</th><th>說明</th><th>計算結果 (mGal)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>FAC</td><td>自由空氣校正</td><td id="fac-cell">—</td></tr>
+          <tr><td>BC</td><td>布格校正</td><td id="bc-cell">—</td></tr>
+          <tr><td>Δg<sub>FA</sub></td><td>自由空氣異常</td><td id="fa-cell">—</td></tr>
+          <tr><td>Δg<sub>B</sub></td><td>布格異常</td><td id="bouguer-cell">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Seismic -->
+  <section id="seismic" class="section">
+    <div class="card">
+      <h2>🔨 校園震測實驗</h2>
+      <span class="pill">黑森林 → 圖書館 · 淺層震測</span>
+      <p style="font-size:14px;color:var(--text-muted);margin-top:6px;">
+        這份報告是我和夥伴一起完成的震測作業：
+        在校園拉一條測線、插上 24 支 geophone，用鐵鎚敲鐵板做「自己製造的小地震」，
+        再從走時圖反推地層速度與厚度。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🧰 實驗流程（縮短版）</h3>
+      <div class="two-col">
+        <div>
+          <h4>1️⃣ 佈設測線與儀器</h4>
+          <ul>
+            <li>每隔固定距離放一支 geophone，確保與測線對齊。</li>
+            <li>使用皮尺紀錄各 geophone 與震源的距離，方便後續畫走時圖。</li>
+          </ul>
+          <h4>2️⃣ 震源操作</h4>
+          <ul>
+            <li>在鐵板上用鐵鎚敲擊，多次重複以提高訊號品質。</li>
+            <li>更換震源位置，獲得不同 offset 的資料。</li>
+          </ul>
+        </div>
+        <div>
+          <h4>3️⃣ 走時圖與速度</h4>
+          <ul>
+            <li>在走時圖上圈出直達波與折射波到時。</li>
+            <li>用線性迴歸估算直達波斜率（V1）與折射波斜率（V2）。</li>
+          </ul>
+          <h4>4️⃣ 厚度估算與解釋</h4>
+          <ul>
+            <li>用二層模型公式估算上層厚度。</li>
+            <li>比對土壤性質與校園地質背景，解讀哪一層可能是填土、哪一層是較硬基盤。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新增：震測實驗照片 -->
+    <div class="card">
+      <h3>📸 震測實驗花絮</h3>
+      <div class="photo-grid">
+        <div class="photo-item">
+          <img src="seismic_tools.jpg" alt="Seismic tools and cables" />
+          實驗開始前的裝備大合照：地震儀主機、長長的訊號線、鐵鎚、鐵板等工具。
+        </div>
+        <div class="photo-item">
+          <img src="seismic_setup.jpg" alt="Setting up geophones" />
+          架設 geophone 與量距離：確定每一支地震儀的間距與位置。
+        </div>
+        <div class="photo-item">
+          <img src="seismic_hammer.jpg" alt="Hammering the source plate" />
+          實際敲擊震源板製造「小地震」的瞬間：真的有種在自己做實驗的感覺。
+        </div>
+        <div class="photo-item">
+          <img src="seismic_traveltime.jpg" alt="Picking travel times" />
+          夥伴在走時圖上標出各個到時點，從斜率算出地層波速與厚度。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📏 厚度估算小工具<span class="badge">互動</span></h3>
+      <p style="font-size:13px;color:var(--text-muted);">
+        以二層速度模型為例：上層速度 V1、下層速度 V2，在臨界距離附近直達波與折射波的走時差為 Δt，<br>
+        可以用近似： h ≈ (Δt · V1 · V2) / (2 · (V2 − V1))。
+      </p>
+      <div class="two-col">
+        <div>
+          <div class="field">
+            <label for="v1">上層速度 V1 (km/s)</label>
+            <input type="number" id="v1" value="0.4" step="0.01" />
+          </div>
+          <div class="field">
+            <label for="v2">下層速度 V2 (km/s)</label>
+            <input type="number" id="v2" value="1.5" step="0.01" />
+          </div>
+        </div>
+        <div>
+          <div class="field">
+            <label for="dt">臨界距離附近走時差 Δt (s)</label>
+            <input type="number" id="dt" value="0.04" step="0.001" />
+          </div>
+          <button class="primary" onclick="calcThickness()">估算厚度 📐</button>
+          <div id="thick-result" class="result"></div>
+        </div>
+      </div>
+      <div class="quote">
+        注意：這只是理想二層模型。實際作業中還需要考慮資料離散、雜訊與多層結構，
+        不過這個工具至少讓「走時 → 厚度」的關係變得可感受。
+      </div>
+    </div>
+  </section>
+
+  <!-- Plates & Scotia -->
+  <section id="plates" class="section">
+    <div class="card">
+      <h2>🗺️ PyGMT & Scotia Plate</h2>
+      <span class="pill">板塊邊界地圖 + 最後一份作業：Scotia Plate 圖</span>
+      <p style="font-size:14px;color:var(--text-muted);margin-top:6px;">
+        在這份作業中，我先用 PyGMT 練習畫全球／區域板塊邊界地圖，
+        再進一步做出「Scotia Plate：地形、火山、地震與板塊相互運動」這張整合圖。
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🧭 產圖重點</h3>
+      <div class="two-col">
+        <div>
+          <ul>
+            <li>背景地形：使用高解析度海底地形資料，顯示海溝、洋脊與大陸邊緣。</li>
+            <li>板塊邊界：以亮綠色線條標出主要邊界位置。</li>
+            <li>火山：以三角形符號標出全新世火山位置。</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>地震：使用不同大小圓圈代表震級；紅色星號標示較大地震。</li>
+            <li>相對運動：綠色箭頭標示附近板塊相互運動方向與大致趨勢。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新增：台灣 PyGMT 地形圖 -->
+    <div class="card">
+      <h3>🗺️ PyGMT 台灣地形圖</h3>
+      <p style="font-size:13px;color:var(--text-muted);">
+        這張是我用 PyGMT 繪出的台灣地形與周邊海底地形圖，雖然不是本次四份作業之一，
+        但我覺得顏色與細節都很漂亮，所以也放進期末作品集裡當小展示。
+      </p>
+      <img src="taiwan_map.png" alt="Taiwan topography map" class="preview" />
+    </div>
+
+    <div class="card">
+      <h3>🌋 Scotia Plate 圖像預覽</h3>
+      <p style="font-size:13px;color:var(--text-muted);">
+        請將你的 Scotia Plate 圖片檔命名為 <code>scotia_plate_map.png</code> 並放在與本 HTML 同一資料夾；
+        或者將下方 <code>src</code> 改成實際檔名。
+      </p>
+      <img src="scotia_plate_map.png" alt="Scotia Plate map" class="preview" />
+    </div>
+
+    <div class="card">
+      <h3>🔍 互動解說選單<span class="badge">點選主題</span></h3>
+      <div class="field">
+        <label for="scotia-topic">想看哪一個面向？</label>
+        <select id="scotia-topic" onchange="updateScotiaInfo()">
+          <option value="topo">地形（Topography）</option>
+          <option value="quakes">地震（Earthquakes）</option>
+          <option value="volcano">火山（Volcanoes）</option>
+          <option value="motion">板塊運動與邊界型態</option>
+        </select>
+      </div>
+      <div id="scotia-info" class="flash-content" style="margin-top:6px;"></div>
+    </div>
+
+    <div class="card">
+      <h3>📂 延伸說明</h3>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="title">從 PyGMT code 到這張圖大概做了什麼？</span><span>＋</span>
+          </div>
+          <div class="accordion-body">
+            <ul>
+              <li>載入地形資料（例如 <code>earth_relief_06m</code>）並設計色階，讓海溝和高地都清楚。</li>
+              <li>繪製海岸線與國界，提供位置感。</li>
+              <li>讀入火山與地震資料檔，以不同符號與顏色疊加在地形上。</li>
+              <li>最後加上板塊邊界線、圖例與標題，輸出高解析檔案。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span class="title">這張圖在期末報告裡可以負責什麼段落？</span><span>＋</span>
+          </div>
+          <div class="accordion-body">
+            <ul>
+              <li>介紹 Scotia Plate 的大致位置與周邊板塊：南美板塊、南極板塊等。</li>
+              <li>說明哪邊是剪切邊界、哪邊是俯衝帶或伸展區。</li>
+              <li>連結地震與火山分布：例如火山鏈對應俯衝帶、地震集中在板塊邊界等。</li>
+              <li>簡單討論這個區域為什麼值得關注（板塊形狀特別、運動複雜、對南極與南美的相對運動有影響等）。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Tab switching
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const sections = document.querySelectorAll(".section");
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.target;
+      tabButtons.forEach(b => b.classList.remove("active"));
+      sections.forEach(s => s.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(target).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  // Flashcards content for HW1
+  const flashTexts = {
+    planet: `
+      <strong>核心概念：</strong>地球不是一顆「均勻的球」，而是分成地殼、地函、外核、內核。<br>
+      外核為液態金屬，對流產生地磁場；地函雖然是固體，但能以地質時間尺度流動。<br><br>
+      <strong>為什麼重要：</strong>之後所有「板塊、對流、火山、地震」其實都在圍繞這個分層在講。<br>
+      <strong>生活比喻：</strong>像一顆洋蔥蛋糕：外皮酥脆、裡面有不同口味的夾層，吃到哪一層口感完全不同。`,
+    gravity: `
+      <strong>核心概念：</strong>地球是略扁的旋轉橢球，重力會隨緯度和高度而變。<br>
+      若觀測到的重力和理論值不同，就可能代表地表下藏有高密度或低密度結構。<br><br>
+      <strong>應用：</strong>重力測勘可以找盆地、構造高地，甚至用衛星任務（像 GRACE）觀察冰川融化與地下水變化。`,
+    seismology: `
+      <strong>核心概念：</strong>P 波為縱波、速度最快，可以穿過液體；S 波為橫波、速度較慢，<strong>不能</strong>穿過液體。<br>
+      世界各地地震站紀錄的 P、S 波到時，讓我們可以反推地球內部的速度結構。<br><br>
+      <strong>應用：</strong>地震預警系統就是利用「P 波先到、S 波晚一點」的時間差來爭取幾秒到十幾秒的時間。`,
+    heat: `
+      <strong>核心概念：</strong>新生的洋壳又熱又薄，遠離中洋脊的海底會變得越老、越冷、越厚。<br>
+      海底熱流與海底年齡圖，是板塊擴張與海底擴張學說的重要證據。<br><br>
+      <strong>口訣：</strong>「離洋脊越遠 → 年齡越大 → 熱流越低 → 地殼越厚」。`,
+    geomag: `
+      <strong>核心概念：</strong>地磁場可以近似為一個巨大的條形磁鐵，但方向會隨時間翻轉。<br>
+      岩石在冷卻時會把當時的地磁方向「錄音」下來，形成古地磁記錄。<br><br>
+      <strong>應用：</strong>海底磁條帶（交替正反磁化）不但證明板塊擴張，也讓我們可以追溯大陸過去的位置。`
+  };
+  const flashBtns = document.querySelectorAll(".flash-btn");
+  const flashContentEl = document.getElementById("flash-content");
+  function setFlash(topic) {
+    flashBtns.forEach(b => b.classList.remove("active"));
+    document.querySelector(`.flash-btn[data-topic="${topic}"]`).classList.add("active");
+    flashContentEl.innerHTML = flashTexts[topic];
+  }
+  flashBtns.forEach(btn => {
+    btn.addEventListener("click", () => setFlash(btn.dataset.topic));
+  });
+  // 初始顯示
+  setFlash("planet");
+
+  // Quiz
+  function checkQuiz() {
+    const selected = document.querySelector("input[name='q1']:checked");
+    const r = document.getElementById("quiz-result");
+    if (!selected) {
+      r.textContent = "先選一個答案，再按提交。";
+      r.className = "result bad";
+      return;
+    }
+    if (selected.value === "S") {
+      r.textContent = "答對！S 波不能在液體中傳播，這也是推論外核為液態的關鍵之一。";
+      r.className = "result good";
+    } else {
+      r.textContent = "再想想：真正不能穿過液體的是 S 波，P 波是可以穿過液體的。";
+      r.className = "result bad";
+    }
+  }
+
+  // Gravity calculator
+  function calcGravity() {
+    const gobs = parseFloat(document.getElementById("gobs").value);
+    const gt = parseFloat(document.getElementById("gt").value);
+    const h = parseFloat(document.getElementById("h").value);
+    const rho = parseFloat(document.getElementById("rho").value);
+    const res = document.getElementById("gravity-result");
+
+    if (isNaN(gobs) || isNaN(gt) || isNaN(h) || isNaN(rho)) {
+      res.textContent = "請確認四個欄位都有填數字。";
+      res.className = "result bad";
+      return;
+    }
+    const FAC = 0.3086 * h;
+    const BC = 0.0419 * rho * h;
+    const dFA = gobs - gt + FAC;
+    const dB = dFA - BC;
+
+    document.getElementById("fac-cell").textContent = FAC.toFixed(2);
+    document.getElementById("bc-cell").textContent = BC.toFixed(2);
+    document.getElementById("fa-cell").textContent = dFA.toFixed(2);
+    document.getElementById("bouguer-cell").textContent = dB.toFixed(2);
+
+    let typeFA = dFA > 0 ? "正異常（可能代表高密度體，如基盤或岩株）" : "負異常（可能代表低密度區，如沉積盆地）";
+    let typeB = dB > 0 ? "正布格異常" : "負布格異常";
+    res.textContent =
+      `Δg_FA = ${dFA.toFixed(2)} mGal → ${typeFA}；Δg_B = ${dB.toFixed(2)} mGal → ${typeB}。`;
+    res.className = "result";
+  }
+
+  // Thickness calculator
+  function calcThickness() {
+    const v1 = parseFloat(document.getElementById("v1").value);
+    const v2 = parseFloat(document.getElementById("v2").value);
+    const dt = parseFloat(document.getElementById("dt").value);
+    const r = document.getElementById("thick-result");
+
+    if (isNaN(v1) || isNaN(v2) || isNaN(dt) || v2 <= v1) {
+      r.textContent = "請輸入合理的 V1、V2、Δt（而且 V2 要大於 V1）。";
+      r.className = "result bad";
+      return;
+    }
+    const h = (dt * v1 * v2) / (2 * (v2 - v1)); // 單位：km
+    r.textContent = `估算上層厚度約為 ${h.toFixed(3)} km（約 ${ (h*1000).toFixed(1) } 公尺）。`;
+    r.className = "result";
+  }
+
+  // Accordion
+  function toggleAccordion(headerEl) {
+    const item = headerEl.parentElement;
+    const open = item.classList.contains("open");
+    document.querySelectorAll(".accordion-item").forEach(i => i.classList.remove("open"));
+    if (!open) item.classList.add("open");
+  }
+
+  // Scotia Plate info
+  function updateScotiaInfo() {
+    const v = document.getElementById("scotia-topic").value;
+    const el = document.getElementById("scotia-info");
+    if (v === "topo") {
+      el.innerHTML = `
+        <strong>地形：</strong>Scotia Plate 位在南美洲與南極洲之間，是一個被深海盆地、海溝與洋脊包圍的區域。<br>
+        地圖上可以看到：安地斯山脈在左側形成明顯高地；南極半島與島弧在下方；中間則是深色的海盆與狹長脊狀地形。`;
+    } else if (v === "quakes") {
+      el.innerHTML = `
+        <strong>地震：</strong>黃色圓點與紅色星號顯示地震事件，集中在板塊邊界附近。<br>
+        特別是南邊剪切帶與島弧附近，地震頻繁，顯示這裡是一個構造活動非常旺盛的區域。`;
+    } else if (v === "volcano") {
+      el.innerHTML = `
+        <strong>火山：</strong>三角形符號標示全新世火山，多分布在島弧與背弧區域。<br>
+        火山與地震的空間關係，支持這裡存在俯衝或複雜剪切邊界所產生的岩漿活動。`;
+    } else {
+      el.innerHTML = `
+        <strong>板塊運動與邊界型態：</strong>綠色箭頭與線條大致指出 Scotia Plate 周圍的相對運動方向。<br>
+        西側接南美板塊，東側與大西洋板塊相連；南邊則與南極板塊有強烈的剪切與拉張。<br>
+        整體來說，這是一塊形狀細長、邊界組合複雜的小板塊，非常適合作為板塊動力學的實例。`;
+    }
+  }
+  updateScotiaInfo();
+</script>
+</body>
+</html>
