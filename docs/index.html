@@ -380,65 +380,25 @@
       <button class="tab-btn" data-target="plates"><span class="icon">🗺️</span>PyGMT & Scotia Plate</button>
     </div>
 
-    <!-- 總覽區域 -->
-    <div class="overview-buttons">
-      <div class="overview-btn" onclick="showSection('hw1')">🌍 Geophysics Playground</div>
-      <div class="overview-btn" onclick="showSection('gravity')">🪐 重力：自由空間與布格重力</div>
-      <div class="overview-btn" onclick="showSection('seismic')">🔨 校園震測實驗</div>
-      <div class="overview-btn" onclick="showSection('plates')">🗺️ PyGMT & Scotia Plate</div>
-    </div>
-
-    <!-- 作業介紹區域 -->
-    <section id="hw1" class="section">
+     <!-- Intro -->
+    <section id="intro" class="section active">
       <div class="card">
-        <h2>📘 Geophysics Playground（我的第一份作業）</h2>
-        <span class="pill">地球偵探社 · 五張入門卡片</span>
-        <p>這是我的第一份作業：希望把地球物理基礎整理成「一頁式教具」。每張卡片都有核心概念、為什麼重要、以及一個生活比喻或口訣。</p>
+        <h2>🏠 網頁導覽</h2>
+        <span class="pill">四份獨立作業 · 一起展示</span>
+        <ul>
+          <li><strong>Geophysics Playground：</strong>第一份作業，把地球物理入門變成五張卡片與小測驗。</li>
+          <li><strong>重力魔法：</strong>從觀測重力出發，計算自由空氣異常與布格異常，順便讓網頁幫忙算。</li>
+          <li><strong>校園震測：</strong>實際拉測線、敲鐵板、畫走時圖，估算淺層地層厚度。</li>
+          <li><strong>PyGMT & Scotia Plate：</strong>用程式畫板塊邊界與地形，最後聚焦在 Scotia Plate 的構造與活動。</li>
+        </ul>
+        <div class="quote">
+          操作方式：點上方分頁切換主題；每一頁都有至少一個可以動手玩的小工具， 既可以複習，也可以當成期末報告時的 Demo 畫面。
+        </div>
       </div>
     </section>
-
-    <section id="gravity" class="section">
-      <div class="card">
-        <h2>🪐 重力魔法：自由空間與布格重力異常</h2>
-        <p>這份作業的主軸是：從一組觀測重力與高度資料，計算出 free-air anomaly 和 Bouguer anomaly，並學會如何解讀這些數字背後的「地下密度故事」。</p>
-      </div>
-    </section>
-
-    <section id="seismic" class="section">
-      <div class="card">
-        <h2>🔨 校園震測實驗</h2>
-        <p>這份報告是我和夥伴一起完成的震測作業：在校園拉一條測線、插上 24 支 geophone，用鐵鎚敲鐵板做「自己製造的小地震」，再從走時圖反推地層速度與厚度。</p>
-      </div>
-    </section>
-
-    <section id="plates" class="section">
-      <div class="card">
-        <h2>🗺️ PyGMT & Scotia Plate</h2>
-        <span class="pill">板塊邊界地圖 + 最後一份作業：Scotia Plate 圖</span>
-        <p>這份作業中，我先用 PyGMT 練習畫全球／區域板塊邊界地圖，再進一步做出「Scotia Plate：地形、火山、地震與板塊相互運動」這張整合圖。</p>
-      </div>
-      <div class="card">
-        <h3>🌋 Scotia Plate 圖像預覽</h3>
-        <img src="scotia_plate_map.png" alt="Scotia Plate map" class="preview" />
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // 顯示選擇的作業區塊
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll(".section");
-      sections.forEach(section => {
-        section.classList.remove("active");
-      });
-      const targetSection = document.getElementById(sectionId);
-      targetSection.classList.add("active");
-    }
-  </script>
-</body>
   
     <!-- HW1 Playground -->
-    <section id="hw1" class="section active">
+    <section id="hw1" class="section">
       <div class="card">
         <h2>📘 Geophysics Playground（我的第一份作業）</h2>
         <span class="pill">地球偵探社 · 五張入門卡片</span>
