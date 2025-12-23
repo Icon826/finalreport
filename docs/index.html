@@ -380,24 +380,16 @@
       <button class="tab-btn" data-target="plates"><span class="icon">🗺️</span>PyGMT & Scotia Plate</button>
     </div>
 
-    <!-- Intro -->
-    <section id="intro" class="section active">
-      <div class="card">
-        <h2>🏠 網頁導覽</h2>
-        <span class="pill">四份獨立作業 · 一起展示</span>
-        <ul>
-          <li><strong>Geophysics Playground：</strong>第一份作業，把地球物理入門變成五張卡片與小測驗。</li>
-          <li><strong>重力魔法：</strong>從觀測重力出發，計算自由空氣異常與布格異常，順便讓網頁幫忙算。</li>
-          <li><strong>校園震測：</strong>實際拉測線、敲鐵板、畫走時圖，估算淺層地層厚度。</li>
-          <li><strong>PyGMT & Scotia Plate：</strong>用程式畫板塊邊界與地形，最後聚焦在 Scotia Plate 的構造與活動。</li>
-        </ul>
-        <div class="quote">
-          操作方式：點上方分頁切換主題；每一頁都有至少一個可以動手玩的小工具， 既可以複習，也可以當成期末報告時的 Demo 畫面。
-        </div>
-      </div>
-    </section>
+    <!-- 這裡是總覽區域，改為按鈕區 -->
+    <div class="tabs">
+      <button class="tab-btn active" data-target="hw1">第一份作業：Geophysics Playground</button>
+      <button class="tab-btn" data-target="gravity">重力：自由空間與布格重力</button>
+      <button class="tab-btn" data-target="seismic">校園震測實驗</button>
+      <button class="tab-btn" data-target="plates">PyGMT & Scotia Plate</button>
+    </div>
+    
     <!-- HW1 Playground -->
-    <section id="hw1" class="section">
+    <section id="hw1" class="section active">
       <div class="card">
         <h2>📘 Geophysics Playground（我的第一份作業）</h2>
         <span class="pill">地球偵探社 · 五張入門卡片</span>
