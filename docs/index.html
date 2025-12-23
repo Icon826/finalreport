@@ -571,48 +571,33 @@
         <span class="pill">板塊邊界地圖 + 最後一份作業：Scotia Plate 圖</span>
         <p style="font-size:14px;color:var(--text-muted);margin-top:6px;"> 在這份作業中，我先用 PyGMT 練習畫全球／區域板塊邊界地圖， 再進一步做出「Scotia Plate：地形、火山、地震與板塊相互運動」這張整合圖。 </p>
       </div>
-      <div class="card">
-        <h3>🧭 產圖重點</h3>
-        <div class="two-col">
-          <div>
-            <ul>
-              <li>背景地形：使用高解析度海底地形資料，顯示海溝、洋脊與大陸邊緣。</li>
-              <li>板塊邊界：以亮綠色線條標出主要邊界位置。</li>
-              <li>火山：以三角形符號標出全新世火山位置。</li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-              <li>地震：使用不同大小圓圈代表震級；紅色星號標示較大地震。</li>
-              <li>相對運動：綠色箭頭標示附近板塊相互運動方向與大致趨勢。</li>
-            </ul>
-          </div>
-        </div>
-      </div>
       <!-- 新增：台灣 PyGMT 地形圖 -->
       <div class="card">
         <h3>🗺️ PyGMT 台灣地形圖</h3>
         <p style="font-size:13px;color:var(--text-muted);"> 這張是我用 PyGMT 繪出的台灣地形與周邊海底地形圖，雖然不是本次四份作業之一， 但我覺得顏色與細節都很漂亮，所以也放進期末作品集裡當小展示。 </p>
         <img src="taiwan_map.png" alt="Taiwan topography map" class="preview" />
-      </div>
-      <div class="card">
-        <h3>🌋 Scotia Plate 圖像預覽</h3>
-        <p style="font-size:13px;color:var(--text-muted);"> 請將你的 Scotia Plate 圖片檔命名為 <code>scotia_plate_map.png</code> 並放在與本 HTML 同一資料夾； 或者將下方 <code>src</code> 改成實際檔名。 </p>
-        <img src="scotia_plate_map.png" alt="Scotia Plate map" class="preview" />
-      </div>
-      <div class="card">
-        <h3>🔍 互動解說選單<span class="badge">點選主題</span></h3>
-        <div class="field">
-          <label for="scotia-topic">想看哪一個面向？</label>
-          <select id="scotia-topic" onchange="updateScotiaInfo()">
-            <option value="topo">地形（Topography）</option>
-            <option value="quakes">地震（Earthquakes）</option>
-            <option value="volcano">火山（Volcanoes）</option>
-            <option value="motion">板塊運動與邊界型態</option>
-          </select>
-        </div>
-        <div id="scotia-info" class="flash-content" style="margin-top:6px;"></div>
-      </div>
+    <div class="card">
+    <h3>🌋 Scotia Plate 圖像預覽</h3>
+    <p style="font-size:13px;color:var(--text-muted);">
+        請將你的 Scotia Plate 圖片檔命名為 <code>scotia_plate_map.png</code> 並放在與本 HTML 同一資料夾； 
+        或者將下方 <code>src</code> 改成實際檔名。
+    </p>
+    <img src="scotia_plate_map.png" alt="Scotia Plate map" class="preview" />
+    
+    <h4>🧭 PyGMT 產圖重點：</h4>
+    <ul>
+        <li>背景地形：使用高解析度海底地形資料，顯示海溝、洋脊與大陸邊緣。</li>
+        <li>板塊邊界：以亮綠色線條標出主要邊界位置。</li>
+        <li>火山：以三角形符號標出全新世火山位置。</li>
+        <li>地震：使用不同大小圓圈代表震級；紅色星號標示較大地震。</li>
+        <li>相對運動：綠色箭頭標示附近板塊相互運動方向與大致趨勢。</li>
+    </ul>
+
+    <p style="font-size: 14px; color: var(--text-muted);">
+        這張圖展示了 Scotia Plate 的周邊地形、火山、地震分布，並且標出了主要的板塊邊界以及相對運動。
+        可以用來輔助討論地震與火山分布的關聯，以及板塊邊界的性質。
+    </p>
+</div>
       <div class="card">
         <h3>📂 延伸說明</h3>
         <div class="accordion">
